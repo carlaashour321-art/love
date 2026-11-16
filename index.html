@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click for Love</title>
+    <style>
+        /* Safha bayda w sheshe kemle */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            overflow: hidden; /* Ta ma yetla3 scrollbars */
+            cursor: pointer;
+            user-select: none; /* Ta ma y3mel select lal kelme iza kabas ktir */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* El style taba3 el kalimet yalle rah tetla3 */
+        .floating-word {
+            position: absolute;
+            font-size: 28px;
+            font-weight: bold;
+            transform: translate(-50%, -50%); /* Ta tetla3 el kelme bel nos tameman mahal ma kabaset */
+            pointer-events: none; /* Ta ma t2asser 3al kabse yalle ba3da */
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        /* El harake: betbayyen w ba3d 3 seconds betrouh shway shway */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -30%) scale(0.8);
+            }
+            15% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            30% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -70%) scale(0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Hon fi 50 kelme (fiik tghayyer aw tzid 3layon metel ma baddak)
+        const words = [
+            "bhbk", "sht2tlk", "hbk", "miss you", "luf you",
+            "ruhee", "hayete", "albe", "love you", "3yune",
+            "omree", "my love", "b3sh2k", "honey", "bb",
+            "enta kel shi", "infini", "forever", "always", "habibi",
+            "babyyy", "chp1", "only one",
+            "soulmate", "angel", 
+            "aleeee",  "adore you","chouchouuuu","myyyy","cha8belll","caelllll","milaaa","us"
+            , "darling", 
+            "bmut fik",   
+            "stay with me",  "endless love","my man","daddyyy","brooo","to the moon and back"
+        ];
+
+        // Alwen helwe w mnawwa3a
+        const colors = [
+            "#e63946", "#ff006e", "#8338ec", "#3a86ff", "#fb5607",
+            "#ffbe0b", "#06d6a0", "#d90429", "#9b5de5", "#f15bb5",
+            "#00bbf9", "#ff4d6d", "#c9184a", "#7209b7", "#4361ee"
+        ];
+
+        // Bas tekbes 3al sheshe
+        document.addEventListener("click", function(event) {
+            // 1. Ekhla2 element jdid lal kelme
+            const wordElement = document.createElement("span");
+            wordElement.classList.add("floating-word");
+
+            // 2. Na22e kelme 3ashwa2iye men el 50
+            const randomWord = words[Math.floor(Math.random() * words.length)];
+            wordElement.innerText = randomWord;
+
+            // 3. Na22e lon 3ashwa2i
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            wordElement.style.color = randomColor;
+
+            // 4. Hotta bel mahal yalle kabaset fi (X w Y)
+            wordElement.style.left = event.clientX + "px";
+            wordElement.style.top = event.clientY + "px";
+
+            // 5. Zida 3al safha
+            document.body.appendChild(wordElement);
+
+            // 6. Mahiya men el code ba3d 3 seconds (3000 milliseconds) ta ma yot2al el browser
+            setTimeout(() => {
+                wordElement.remove();
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>
